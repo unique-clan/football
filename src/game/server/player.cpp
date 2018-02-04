@@ -13,7 +13,7 @@ CPlayer::CPlayer(CGameContext *pGameServer, int ClientID, int Team)
 {
 	m_pGameServer = pGameServer;
 	m_RespawnTick = Server()->Tick();
-	m_DieTick = Server()->Tick();
+	m_DieTick = Server()->Tick()-Server()->TickSpeed()*3;
 	m_ScoreStartTick = Server()->Tick();
 	m_pCharacter = 0;
 	m_ClientID = ClientID;
@@ -253,8 +253,6 @@ void CPlayer::SetTeam(int Team, bool DoChatMsg)
 
 	m_Team = Team;
 	m_LastActionTick = Server()->Tick();
-	// we got to wait 0.5 secs before respawning
-	m_RespawnTick = Server()->Tick()+Server()->TickSpeed()/2;
 	str_format(aBuf, sizeof(aBuf), "team_join player='%d:%s' m_Team=%d", m_ClientID, Server()->ClientName(m_ClientID), m_Team);
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 

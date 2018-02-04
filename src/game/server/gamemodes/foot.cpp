@@ -79,10 +79,7 @@ int CGameControllerFoot::OnGoalRed(int Owner)
 	}
 	else
 		str_format(aBuf, sizeof(aBuf), "%s scored for the blue team", Server()->ClientName(Owner));
-	if (GameServer()->m_apPlayers[Owner]->GetTeam() == TEAM_BLUE)
-		m_aTeamscore[TEAM_BLUE]++;
-	else if (GameServer()->m_apPlayers[Owner]->GetTeam() == TEAM_RED)
-		m_aTeamscore[TEAM_RED]--;
+	m_aTeamscore[TEAM_BLUE]++;
 
 	GameServer()->CreateSoundGlobal(SOUND_CTF_DROP);
 
@@ -114,10 +111,7 @@ int CGameControllerFoot::OnGoalBlue(int Owner)
 	}
 	else
 		str_format(aBuf, sizeof(aBuf), "%s scored for the red team", Server()->ClientName(Owner));
-	if (GameServer()->m_apPlayers[Owner]->GetTeam() == TEAM_RED)
-		m_aTeamscore[TEAM_RED]++;
-	else if (GameServer()->m_apPlayers[Owner]->GetTeam() == TEAM_BLUE)
-		m_aTeamscore[TEAM_BLUE]--;
+	m_aTeamscore[TEAM_RED]++;
 
 	GameServer()->CreateSoundGlobal(SOUND_CTF_DROP);
 
